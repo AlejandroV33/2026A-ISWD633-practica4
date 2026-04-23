@@ -10,7 +10,7 @@ Asignar núcleos de CPU específicos:
 ```
 
 **¿Como saber el numero de procesadores virtuales que tiene una máquina?**
-## COMPLETAR
+En macos: sysctl -n hw.ncpu. En ubuntu: nproc. En windows: lscpu
 
 ## Ejemplos
 _Puedes copiar y ejecutar directamente cada uno de los comandos_
