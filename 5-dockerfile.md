@@ -57,13 +57,16 @@ No olvides verificar en qué directorio se encuentra el archivo Dockerfile
 ```
 
 **¿Cuántos pasos se han ejecutado?**
-# RESPONDER 
+Los 6 pasos de las 6 lineas del Dcokerfile. 
 
 ### Inspeccionar la imagen creada
-# COMPLETAR CON UNA CAPTURA
+<img width="1512" height="949" alt="imagen" src="https://github.com/user-attachments/assets/ddd01337-2685-4842-af72-54625eb013ae" />
 
 **Modificar el archivo index.html para incluir su nombre y luego crear una nueva versión de la imagen anterior**
 **¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+En los primeros pasos se ve la palabra CACHED al principio de la línea, lo que significa que estos pasos no se ha ejecutado. Docker no volvió a descargar CentOS ni a instalar Apache porque esas capas no cambiaron. A partir del paso de COPY ./web /var/www/html, Docker detecta que el contenido de la carpeta cambió. Aquí se rompe la caché y ejecuta de nuevo (desde 0) los ultimos 3 pasos de las ultimas 3 lineas del Dcokerfile.
+
+A partir de ahí, Docker ejecuta ese paso y los siguientes (EXPOSE, CMD) de nuevo, aunque estos últimos suelen ser instantáneos.
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
@@ -79,10 +82,11 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
-# COMPLETAR CON LA RESPUESTA
+55001->80
 
 **¿Qué es una imagen huérfana?**
-# COMPLETAR CON LA RESPUESTA
+Una imagen huérfana es una imagen que ha perdido su relación con un nombre y una etiqueta (tag), quedando listada como <none>:<none>.
+Suele ocurrir cuando se reconstruye una imagen usando el mismo nombre y versión (ej: mi-web-apache:1.0). Docker le asigna el nombre a la nueva versión, y la versión anterior se queda "sin nombre" pero sigue ocupando espacio en disco.
 
 ### Identificar imágenes huérfanas
 ```
